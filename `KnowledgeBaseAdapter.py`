@@ -1,0 +1,16 @@
+from typing import List
+import requests
+
+class MarketKnowledgeAdapter:
+    def __init__(self):
+        self.knowledge_base_url = "http://exampleknowledgebase.com/sparql"
+
+    def get_trending_products(self) -> List[str]:
+        """Fetches trending products from the knowledge base."""
+        query = """
+            PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+            SELECT ?product WHERE {
+                ?product rdf:type :TrendingProduct.
+            }
+        """
+        response = requests.post
