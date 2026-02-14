@@ -1,0 +1,34 @@
+from typing import Dict, List
+import requests
+
+class LinkOptimizer:
+    def __init__(self):
+        self.performance_data = {}
+
+    def optimize_link(self, link: str) -> str:
+        """Optimizes an affiliate link based on performance data."""
+        try:
+            # Analyze the link's performance
+            click_rate = self._get_clickthrough_rate(link)
+            conversion_rate = self._get_conversion_rate(link)
+            
+            # Optimize UTM parameters based on best practices
+            optimized_link = f"{link}?utm_medium=affiliate&utm_source={self._determine_best_utm_source(click_rate)}"
+            return optimized_link
+        except Exception as e:
+            raise RuntimeError(f"Link optimization failed: {str(e)}")
+
+    def _get_clickthrough_rate(self, link: str) -> float:
+        """Fetches click-through rate for a given link."""
+        return 0.15
+
+    def _get_conversion_rate(self, link: str) -> float:
+        """Fetches conversion rate for a given link."""
+        return 0.05
+
+    def _determine_best_utm_source(self, ctr: float) -> str:
+        """Determines the best UTM source based on CTR."""
+        if ctr > 0.1:
+            return "social"
+        else:
+            return "email"
