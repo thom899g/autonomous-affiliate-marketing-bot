@@ -1,0 +1,23 @@
+import logging
+from typing import Dict
+
+class PerformanceTracker:
+    def __init__(self):
+        self.metrics = {'clicks': 0, 'conversions': 0}
+        self.logger = logging.getLogger('PerformanceTracker')
+
+    def log_event(self, event_id: str, converted: bool) -> None:
+        """Logs a user event (click or conversion)."""
+        if converted:
+            self.metrics['conversions'] += 1
+        else:
+            self.metrics['clicks'] += 1
+        self.logger.info(f"Event {event_id}: {'conversion' if converted else 'click'}")
+
+    def get_metrics(self) -> Dict[str, int]:
+        """Returns current performance metrics."""
+        return self.metrics
+
+    def reset Metrics(self) -> None:
+        """Resets tracking metrics."""
+        self.metrics = {'clicks': 0, 'conversions': 0}
